@@ -37,5 +37,25 @@ To create either type of API key head to the Settings page, then scroll to the A
 https://smith.langchain.com/o/218834cf-5e1a-50ea-8422-eff98cabb30e/settings
 
 
+langgraph - 
+a. provide controllable cognitive architecture for any task.
+b. It is designed for human agent collaboration
+c. deploy agents at scale, monitor carefully iterate boldly
 
+--------------CODE--------------
+
+1. We would be needing GROQ api key, Langsmith api key (for tracking)
+2. beside this we need to create environment for langchain_api_key (same as langsmith api key), langchain traching v2 which is true and langchain project name
+3. we use chatgroq and any mode associated with groq
+4. we start building chatbot using Langgraph
+   a. from langgraph.graph import StateGraph which help in managing the state, START and END which indicate the start and END of the node, which actually shows the flow of the entire chatbot.
+   The StateGraph keeps on changing based on some parameters. Thus we use from langgraph.graph.message import add_messages , it means when the state of the agent will keep on changing the messages. 
+5. We create our own class for state management. The messages is of type annotated, it is of list type, the add_messages is responsible for adding the messages to the list and not overwrite them
+6. we define the graph_builder.
+7. Now we have to define the chatbot function which takes parameter as state (current message) and based on the messages/user queries the llm will get invoked
+8. This chatbot need to be added to graph builder. graph_builder.add_node("chatbot",chatbot)
+9. To get the flow we use graph_builder.add_edge(START,"chatbot") and graph_builder.add_edge("chatbot",END)
+10. After creating the node , we ccompile the graph_builder
+11. we can use IPython.display to show the mages.
+12. create feasibility for user to enter the messages.
 
