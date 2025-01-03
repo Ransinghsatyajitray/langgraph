@@ -59,3 +59,47 @@ c. deploy agents at scale, monitor carefully iterate boldly
 11. we can use IPython.display to show the mages.
 12. create feasibility for user to enter the messages.
 
+--------------------------------------------------------------------------------------------------
+### Core Concepts 
+1. Simple Graph
+2. LangGraph Studio
+3. Chain
+4. Router
+5. Agent
+6. Agent with Memory
+7. Intro to Deployment
+
+### State & Memory
+1. State Schema
+2. State Reducers
+3. Multiple Schemas
+4. Trim and Filter Messages
+5. Chatbot with Summarizing Messages and Memory
+6. Chatbot with Summarizing Messages and External Memory
+
+### UX and Human_in_the_loop
+1. Streaming
+2. Breakpoints
+3. Editing State and Human Feedback
+4. Dynamic Breakpoints
+5. Time Travel
+
+### Building Your Assistant
+1. Parallelization
+2. Sub graphs
+3. Map-reduce
+4. Research Assistant
+
+### Long-Term-Memory
+1. Short Vs Long Term Memory
+2. LangGraph Store
+3. Memory Schema + Profile
+4. Memory Schema + Collection
+5. Build an Agent with Long Term Memory
+
+### Deployment
+1. Deployment Concepts
+2. Creating a Deployment
+3. Connecting to a Deployment
+4. Double Texting
+5. Assistants
