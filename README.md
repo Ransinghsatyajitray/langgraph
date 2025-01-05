@@ -60,7 +60,7 @@ c. deploy agents at scale, monitor carefully iterate boldly
 12. create feasibility for user to enter the messages.
 
 --------------------------------------------------------------------------------------------------
-### Core Concepts 
+### Core Concepts (Introduce Langgraph and build few generalist agent architecture)
 1. Simple Graph
 2. LangGraph Studio
 3. Chain
@@ -69,7 +69,7 @@ c. deploy agents at scale, monitor carefully iterate boldly
 6. Agent with Memory
 7. Intro to Deployment
 
-### State & Memory
+### State & Memory (work with messages to exchange info with the agent, use of memory to save agents internal state)
 1. State Schema
 2. State Reducers
 3. Multiple Schemas
@@ -77,20 +77,20 @@ c. deploy agents at scale, monitor carefully iterate boldly
 5. Chatbot with Summarizing Messages and Memory
 6. Chatbot with Summarizing Messages and External Memory
 
-### UX and Human_in_the_loop
+### UX and Human_in_the_loop(to approve specific actions or review your agent's work)
 1. Streaming
 2. Breakpoints
 3. Editing State and Human Feedback
 4. Dynamic Breakpoints
 5. Time Travel
 
-### Building Your Assistant
+### Building Your Assistant (to reproduce customizable knowledge outputs like reports or wikis or summaries)
 1. Parallelization
 2. Sub graphs
 3. Map-reduce
 4. Research Assistant
 
-### Long-Term-Memory
+### Long-Term-Memory 
 1. Short Vs Long Term Memory
 2. LangGraph Store
 3. Memory Schema + Profile
@@ -103,3 +103,55 @@ c. deploy agents at scale, monitor carefully iterate boldly
 3. Connecting to a Deployment
 4. Double Texting
 5. Assistants
+
+https://github.com/langchain-ai/langchain-academy this can be useful
+
+
+Notes:
+1. One type of LLM Application that we can build is Agent. We can create Agents by allowing LLMs to determine the control flow of an application.
+2. They can automate wide range of tasks that previously were impossible.
+3. There are different scenarios based on which the development in Langgraph are happening. We might need an agent to always call specific tool first or to use different prompts based on its state. Langgraph is a framwork for building multi agent and agentic applications. Langgraph provide better precision and control into agentic workflows , thus making them suitable for complexity of real world systems.
+4. Use python 3.11, this version is required for best compatibility with LangGraph
+5. Set the LANGCHAIN_API_KEY and set LANGCHAIN_TRACING_V2=true
+6. Set Openai api key and tavily api key
+7. LangGraph Studio is only compatible with MacOS. 
+
+# ---------------------------------------------------
+Module 1:
+How Agent work?
+Several generic agent architectures
+Common challenges faced by developers when building agents
+Why building custom agents with domain specific workflows and why focus on high reliability is important
+
+Langgraph models agent workflows as graphs
+Langgraph core abstraction - state, nodes, edges + 
+core component - tools, messages, memory
+building graphs around the chat models 
+ReAct agent architecture
+
+Langgraph studio as desktop IDE - for building and debugging agentic applications
+
+### Do I need to use LangChain to use LangGraph? What’s the difference? - No
+LangGraph is an orchestration framework for complex agentic systems and is more low-level and controllable than LangChain agents.
+LangChain provides a standard interface to interact with models and other components, useful for straight-forward chains and retrieval flows.
+
+"low-level" means that LangGraph gives you more direct control over the individual components and steps involved in building an AI agent. It's like having the building blocks to assemble your own custom agent rather than using a pre-built one with limited customization options.
+
+**LangChain Agents:** These are higher-level tools that provide a more streamlined and user-friendly way to create agents. They often come with pre-defined functionalities and structures, making them easier to use for common tasks. However, this can limit your flexibility if you need to create something very specific or complex.
+
+**LangGraph:** This is a lower-level framework that gives you more granular control. You can define the individual steps, decision points, and interactions within your agent's workflow. This allows for greater customization and the ability to create more complex and unique agent behaviors.
+
+
+### How is LangGraph different from other agent frameworks?
+Other agentic frameworks can work for simple, generic tasks but fall short for complex tasks bespoke to a company’s needs. LangGraph provides a more expressive framework to handle companies’ unique tasks without restricting users to a single black-box cognitive architecture.
+
+### Does LangGraph impact the performance of my app? - no overhead to the code
+LangGraph will not add any overhead to your code and is specifically designed with streaming workflows in mind.
+
+### Langgraph - free, open source
+
+### How are LangGraph and LangGraph Cloud different?
+LangGraph is a stateful, orchestration framework that brings added control to agent workflows. LangGraph Cloud is a service for deploying and scaling LangGraph applications, with a built-in Studio for prototyping, debugging, and sharing LangGraph applications. 
+
+![image](<Screenshot 2025-01-05 230710-1.png>)
+

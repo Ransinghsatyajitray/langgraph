@@ -5,3 +5,12 @@ langchain_groq
 langchain_community
 python-dotenv
 ipykernel
+langgraph-sdk
+langgraph-checkpoint-sqlite
+langchain-core
+langchain-openai
+notebook
+tavily-python
+wikipedia
+trustcall
+langgraph-cli
