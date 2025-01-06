@@ -234,9 +234,20 @@ It is another way of using chatmodel.
 It is required in cases where we want to connect with external tools like api that requires particular payload to run.
 We need to see how can we use messages as graph state
 -> we define the MessageState class which is of type dictionary and has one key named messages which stores list of messages
+
+**Reducer** -> annotate + add_message
 -> one challenge is from previous discussion that we over write the value of key "messages" from state update, Here we dont want that (overwriting), we want to append to that list every time the chat model produces the output so that full history of conversation is preserved. => This gives the idea of **reducers function.**
 
-We have built in MessageState, which has builtin message key and add_messages reducer
+We have built in MessageState, which has builtin message key and add_messages reducer.
+
+**Router**
+Router return either a tool call or return a natural language response based on chatmodel response to the input.
+conditional_edge tool condition is used for selecting the edge to follow.
+
+**Agent**
+
+
+
 
 
 
