@@ -234,9 +234,16 @@ It is another way of using chatmodel.
 It is required in cases where we want to connect with external tools like api that requires particular payload to run.
 We need to see how can we use messages as graph state
 -> we define the MessageState class which is of type dictionary and has one key named messages which stores list of messages
+![alt text](<Screenshot 2025-01-06 142531-1.png>)
+
+![alt text](<bind tool-1.png>)
 
 **Reducer** -> annotate + add_message
 -> one challenge is from previous discussion that we over write the value of key "messages" from state update, Here we dont want that (overwriting), we want to append to that list every time the chat model produces the output so that full history of conversation is preserved. => This gives the idea of **reducers function.**
+
+![alt text](<Screenshot 2025-01-06 135208-1.png>)
+
+![alt text](<Screenshot 2025-01-06 141901-1.png>)
 
 We have built in MessageState, which has builtin message key and add_messages reducer.
 
@@ -245,8 +252,61 @@ Router return either a tool call or return a natural language response based on 
 conditional_edge tool condition is used for selecting the edge to follow.
 
 **Agent**
+A small change is required to change the router into generic agentic application. 
+message -> invoke the model -> if it shows the tool -> return the message to the user
+
+![alt text](<Screenshot 2025-01-06 151957-1.png>)
+
+![alt text](<Screenshot 2025-01-06 155050-1.png>)
+
+But what if we take the message and put it back to the model -> this is the ReAct architecture
+Act (model call to tool) -> pass the tool output back to the model -> reason, model decides what to do next
+
+The model will continue to call the tool in loop till it finds the solution where it can send natural language response.
+
+Please note the langchain key and langsmith key are same
 
 
+**LangSmith**
+Gives the access to tracing and evaluation.
+
+**Agent with Memory**
+ReAct = Act + Observe + Reason
+
+Check pointers used to save the graph state after each step which gives memory
+MemorySaver - an in memory key-value store for Graph State.
+Every step in our graph will write a checkpoint which contains the step of the graph at that point. And these checkpoints can be associated together to form a thread.
+
+we have a new parameter named config that stores the thread in invoke which essentially store the checkpoint info that serves to thread when collected.
+
+![alt text](<Screenshot 2025-01-06 183901-1.png>)
+
+In Langgraph studio when we compile we dont need checkpointer because studio is backed by Langgraph api which has its own persistance layer (which is postgres behind the scene)
+
+![alt text](<Screenshot 2025-01-06 185455-1.png>)
+
+
+![alt text](<Screenshot 2025-01-06 190617-1.png>)
+
+**Deployment**
+Once I have everything ready in notebook how can i put it in production.
+LangGraph - creation of agent
+LangGraph API - API hosted via langgraph cloud, bundles the graph code.
+Langgraph Cloud - allow github repo, monitoring, tracing, documentation, accessible via URL
+LangGraph Studio - locally or cloud deployment
+LangGraph SDK - Programmatically interact with langgraph graph
+
+
+Testing Locally
+![alt text](<the url is locally running api-1.png>)
+Testing in Cloud 
+    
+![alt text](<Screenshot 2025-01-06 203951-1.png>)
+![alt text](<Screenshot 2025-01-06 204020-1.png>)
+![alt text](<Screenshot 2025-01-06 204100-1.png>)
+![alt text](<Screenshot 2025-01-06 204134-1.png>)
+![alt text](<Screenshot 2025-01-06 204219-1.png>)
+![alt text](<Screenshot 2025-01-06 204327-1.png>)
 
 
 
