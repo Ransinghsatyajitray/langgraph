@@ -155,3 +155,79 @@ LangGraph is a stateful, orchestration framework that brings added control to ag
 
 ![image](<Screenshot 2025-01-05 230710-1.png>)
 
+Many LLM App use control flow
+START -> **STEP 1 -> LLM -> ..(WITH STEPS PRE/POST LLM CALL{tool calls, retrieval})..STEP N** -> END
+                                               I
+                                               V
+                                             Chain
+
+We can the LLM system that can pick their own control flow depending on the problem it faces
+
+Chain -> fixed control flow set by developer. Example: A chain might be used to summarize a long document by first splitting it into chunks, then summarizing each chunk, and finally combining the summaries.
+Agent -> LLM defined control flow. Example: An agent might be used to answer a complex question. It might decide to search the web, access a database, or use a calculator, depending on what's needed to answer the question.
+
+Agent types -> Router (less control), Fully Autonomous(More control)
+![image](<Screenshot 2025-01-05 232741-1.png>)
+
+![image](<Screenshot 2025-01-05 233530-1.png>)
+
+![image](<Screenshot 2025-01-05 233642-1.png>)
+
+Langgraph helps to build agents that maintain reliability even when we increase the level of control that we give to the agent
+
+**LangGraph** -> balances reliability with control
+
+In many application we combine the developer intuition with LLM control. so that we can specify certain steps that we always wanted to be fixed.
+
+![image](<Screenshot 2025-01-05 234147-1.png>)
+
+How it works:
+
+a. Step 1 completes its task: This could be anything, like retrieving information from a database or summarizing a document.
+b. LLM analyzes the output: The LLM examines the results from Step 1 and determines the best course of action.
+c. LLM decides what Step 2 should do: Based on its analysis, the LLM "tells" Step 2 what to do. This could involve choosing a different action altogether, modifying the original plan, or proceeding as initially intended.
+
+In essence, the LLM acts as the brain of the agent, providing the intelligence and decision-making capabilities needed to transform a simple, linear chain into a dynamic and adaptive agent.
+
+
+![image](<Screenshot 2025-01-05 234810-1.png>)
+
+Nodes can be considered as steps in the application like tool call, retrieval step and edges are the connectivity between the nodes.
+
+Pillars that help langgraph achieve maintaining reliability even when we increase the level of control that we give to the agent.  ->   persistence, streaming, human in the loop, controllability.  
+
+![image](<Screenshot 2025-01-06 000112-1.png>)
+
+![image](<Screenshot 2025-01-06 000421-1.png>)
+
+**Simple Graph**
+It has Normal Edge and Conditional Edge.
+The state is a dictionary.
+Node : Each node will overwrite the value of graph state with something new.
+Edges: Connect the nodes. we give some condition to choose node 2 or 3
+
+Nodes -> update the state
+Conditional Edge -> which node to go to next.
+Graph construction -> It consist of initializing the state graph (the blue print) then adding nodes and edges for knowing the next nodes to follow.
+
+**Langgraph Studio**
+1. We have requirements.txt file - has the pkgs
+2. python scripts
+3. .env file - stores the api keys
+
+We can load the studio folder as a project in Langgraph studio.(from mac os only)
+we need docker running
+
+
+**Chain**
+With nodes and edges, here we include the concept of chains like below within langgraph
+a. Chat messages
+b. Chat models
+c. Binding Tools
+d. Executing tool calls
+
+
+
+
+
+
