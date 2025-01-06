@@ -226,6 +226,20 @@ b. Chat models
 c. Binding Tools
 d. Executing tool calls
 
+Chat messages -> The chat models interact with the messages.
+we can define a chat model, pass list of messages, get the ai messages back out with some content and meta data
+
+**Tools**
+It is another way of using chatmodel.
+It is required in cases where we want to connect with external tools like api that requires particular payload to run.
+We need to see how can we use messages as graph state
+-> we define the MessageState class which is of type dictionary and has one key named messages which stores list of messages
+-> one challenge is from previous discussion that we over write the value of key "messages" from state update, Here we dont want that (overwriting), we want to append to that list every time the chat model produces the output so that full history of conversation is preserved. => This gives the idea of **reducers function.**
+
+We have built in MessageState, which has builtin message key and add_messages reducer
+
+
+
 
 
 
