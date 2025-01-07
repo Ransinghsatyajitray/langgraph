@@ -359,11 +359,91 @@ Testing in Cloud
 ![alt text](<Screen shots/LangGraph_Cloud07.png>)
 
 
+## Module 2
+End users expect the agentic application to remember previous interactions
+eg. chatbots
+
+LangGraph give you control on memory in applications
+We will see how the persistence is added to graph.
+**How we can manage the high token usage in case of memory/persistence -> filtering , trimming, summarization**
+DIAGRAM
+
+**databases used in memory**
+internal - key, value
+external - postgres and sqlite
+DIAGRAM
+
+**State**
+agent with memory = act + observe + reason + persist state
+DIAGRAM
+
+
+**Schema**
+Defines the structure and type of data that our graph will use. 
+
+#### TypedDict
+We often use TypedDict which is recommended (dictionary where type of variables)
+![alt text](<Screen shots/schema typeddict.png>)
+
+
+![alt text](<Screen shots/schema typeddict01.png>)
+
+We feed the TypedDict class to the StateGraph
+DIAGRAM
+
+
+NODE + EDGE + A(STATE_OBJECT -> StateGraph) + add node to A + build logic for connecting nodes (edges) {add_edge or add_conditional_edge(based on some function)}
+DIAGRAM
+
+#### DataClassState
+![alt text](<Screen shots/schemaDataClassState.png>)
+
+![alt text](<Screen shots/node defn and invoking with TypeDict_typing vs DataClassState_dataclass.png>)
+
+#### Pydantic
+This does the data check which type dict and data class state were not doing
+![alt text](<Screen shots/typedict vs dataclassstate vs pydantic.png>)
 
 
 
+**State Reducers**
+They specify how state update are done on specific keys.
+by default when we do any update, we overwrite the values of the state key, we cant update the same shared state key as it become ambiguous as to which state to keep. we get invalid update error there
+
+![alt text](<Screen shots/Without using reducer(annotated + add).png>)
+
+![alt text](<Screen shots/using the reduced using add and annotated.png>)
 
 
+the add just append value to the list.
 
+There might be cases where the type of the value entered to the invoke might be different (like none type). This motivated the use of Custom Reducers.
 
+**Custom Reducers**
+![alt text](<Screen shots/Motivation for using custom reducer.png>)
+There might be scenarios where the entries to invoke are of different type for those scenarios we use custom reducers.
+
+**Messages**
+MessagesState is a shortcut to work on messages (AI + Human + System + Tools) specifically during chat type interactions.
+
+**MessagesState**
+
+**CustomMessagesState**
+
+**ExtendedMessagesState**
+
+![alt text](<Screen shots/CustomMessagesState and motivation for using ExtendedMessageState.png>)
+
+The CustomMessagesState and ExtendedMessagesState are same but its easier to use ExtendedMessagesState.
+
+**add_messages reducer**
+![alt text](<Screen shots/add_messages as a reducer.png>)
+
+**overwriting the value with appending with id argument**
+![alt text](<Screen shots/overwriting the value while appending in a reducer when using id arg in (AI, Human)Messages.png>)
+
+**Removing messages**
+![alt text](<Screen shots/removing messages (here we are removing the 2 recent most messages.png>)
+
+after this if we use add_messages(messages, delete_messages) we can see the messages removed by the reducer
 
