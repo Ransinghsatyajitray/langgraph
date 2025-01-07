@@ -6,11 +6,15 @@ This repo is for knowing the fundamentals of langgraph
 
 **LangGraph** is a library for building *stateful*, *multi-actor* applications with LLMs, used to *create agent and multi-agent workflows*. Compared to other LLM frameworks, it offers these core benefits: *cycles*, *controllability* and *persistence*. LangGraph allows you to define flows that involve cycles, essential for most agentic architectures differentiating it from the DAG based solutions.
 
-Graph DB -> Nodes, relation between nodes
+![alt text](<Screen shots/LangGraph properties.png>)
+
+Graph DB -> Nodes, relation between nodes (Edge)
             Graph Knowledge -> google search => RAG
 
+![alt text](<Screen shots/NormalEdge_ConditionalEdge.png>)
+
 Why LangGraph ?
-1. **It simplifies the development** - development incolves -> state management and agent coordination
+1. **It simplifies the development** - development involves -> state management and agent coordination
 
                 Agent 1: google search
 Chatbot         Agent 2: wiki search
@@ -18,13 +22,14 @@ Chatbot         Agent 2: wiki search
 
 We need to define workflow, logics
 
-2. **Flexibility** : develops have the flexibility to define their own agent logic and communication protocols.This allows for highly customized applications tailored to specific use cases. Whether you need a chatbot that can handle various types of user requests or a multi-agent system that performs complex tasks, LangGraph provides that tools to build exactly what you need. It's all about giving you the power to create.
+2. **Flexibility** : developers have the flexibility to define their own agent logic and communication protocols.This allows for highly customized applications tailored to specific use cases. Whether you need a chatbot that can handle various types of user requests or a multi-agent system that performs complex tasks, LangGraph provides that tools to build exactly what you need. It's all about giving you the power to create.
 
 
 3. **Scalability** : Large scale multi agent application (it can handle high volume of interaction and complex workflows), there is an enterprise version and langchain are coming up with their own cloud.
 
 4. **Fault Tolerance** : handle errors, fault tolerance mechanism (reliability)
 
+![alt text](<Screen shots/Fault Tolerance.png>)
 
 START NODE -> CHATBOT (LLM) {defination} -> END
 
@@ -58,7 +63,7 @@ c. deploy agents at scale, monitor carefully iterate boldly
 7. Now we have to define the chatbot function which takes parameter as state (current message) and based on the messages/user queries the llm will get invoked
 8. This chatbot need to be added to graph builder. graph_builder.add_node("chatbot",chatbot)
 9. To get the flow we use graph_builder.add_edge(START,"chatbot") and graph_builder.add_edge("chatbot",END)
-10. After creating the node , we ccompile the graph_builder
+10. After creating the node , we compile the graph_builder
 11. we can use IPython.display to show the mages.
 12. create feasibility for user to enter the messages.
 
@@ -72,6 +77,8 @@ c. deploy agents at scale, monitor carefully iterate boldly
 6. Agent with Memory
 7. Intro to Deployment
 
+![alt text](<Screen shots/MOD1_Router_and_tool_calling_agent.png>)
+
 ### State & Memory (work with messages to exchange info with the agent, use of memory to save agents internal state)
 1. State Schema
 2. State Reducers
@@ -80,6 +87,8 @@ c. deploy agents at scale, monitor carefully iterate boldly
 5. Chatbot with Summarizing Messages and Memory
 6. Chatbot with Summarizing Messages and External Memory
 
+![alt text](<Screen shots/MOD2_Memory_LongRunningChat.png>)
+
 ### UX and Human_in_the_loop(to approve specific actions or review your agent's work)
 1. Streaming
 2. Breakpoints
@@ -87,11 +96,15 @@ c. deploy agents at scale, monitor carefully iterate boldly
 4. Dynamic Breakpoints
 5. Time Travel
 
+![alt text](<Screen shots/MOD3_Streaming_Human_in_loop.png>)
+
 ### Building Your Assistant (to reproduce customizable knowledge outputs like reports or wikis or summaries)
 1. Parallelization
 2. Sub graphs
 3. Map-reduce
 4. Research Assistant
+
+![alt text](<Screen shots/MOD4_Human_in_loop_parallelization_customization.png>)
 
 ### Long-Term-Memory 
 1. Short Vs Long Term Memory
