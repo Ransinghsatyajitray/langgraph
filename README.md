@@ -2,7 +2,8 @@
 This repo is for knowing the fundamentals of langgraph
 
 **Langchain Ecosystem**
-![alt text](<Screen shots/Screenshot 2025-01-05 230710-1.png>)
+![alt text](<Screen shots\mod 0\Screenshot 2025-01-05 230710-1.png>)
+
 
 **LangGraph** is a library for building *stateful*, *multi-actor* applications with LLMs, used to *create agent and multi-agent workflows*. Compared to other LLM frameworks, it offers these core benefits: *cycles*, *controllability* and *persistence*. LangGraph allows you to define flows that involve cycles, essential for most agentic architectures differentiating it from the DAG based solutions.
 
