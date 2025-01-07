@@ -407,6 +407,7 @@ This does the data check which type dict and data class state were not doing
 
 
 **State Reducers**
+
 They specify how state update are done on specific keys.
 by default when we do any update, we overwrite the values of the state key, we cant update the same shared state key as it become ambiguous as to which state to keep. we get invalid update error there
 
@@ -420,6 +421,7 @@ the add just append value to the list.
 There might be cases where the type of the value entered to the invoke might be different (like none type). This motivated the use of Custom Reducers.
 
 **Custom Reducers**
+
 ![alt text](<Screen shots/Motivation for using custom reducer.png>)
 There might be scenarios where the entries to invoke are of different type for those scenarios we use custom reducers.
 
@@ -437,13 +439,66 @@ MessagesState is a shortcut to work on messages (AI + Human + System + Tools) sp
 The CustomMessagesState and ExtendedMessagesState are same but its easier to use ExtendedMessagesState.
 
 **add_messages reducer**
+
 ![alt text](<Screen shots/add_messages as a reducer.png>)
 
 **overwriting the value with appending with id argument**
+
 ![alt text](<Screen shots/overwriting the value while appending in a reducer when using id arg in (AI, Human)Messages.png>)
 
 **Removing messages**
+
 ![alt text](<Screen shots/removing messages (here we are removing the 2 recent most messages.png>)
 
 after this if we use add_messages(messages, delete_messages) we can see the messages removed by the reducer
+
+#### Multiple Schema
+Typically graph nodes communicate with single schema meaning single input and output.
+
+There might be scenarios where there would be interactions within modes whose output wont necessarily be available to end user
+
+**PrivateState**
+
+![alt text](<Screen shots/PrivateState.png>)
+
+![alt text](<Screen shots/PrivateState01.png>)
+
+**Input/Output Schema**
+This specifically define what we want in input and what we want in output. These are basically filter on overall state.
+
+![alt text](<Screen shots/Using inputstate and outputstate as filter to stategraph.png>)
+
+**Trim and Filter Messages**
+Handling messages with chatbots is difficult in some cases.
+for filtering in RemoveMessage we remove all the messages except some recent ones
+
+**filtering=MessagesState + RemoveMessage**
+
+![alt text](<Screen shots/removing older messages and keeping recent onces Filtering.png>)
+
+**trimming**
+we can trim the messages based on specific number of tokens
+![alt text](<Screen shots/trimming.png>)
+
+we use trim_messages , we have parameter like strategy and allow_partial
+
+**ChatBot with summarizing Messages and External Memory**
+We use LLM to produce running summary of the conversation
+![alt text](<Screen shots/summary in MessageState.png>)
+
+Define the node called call model -> It get the summary if it is present it add to the messages if not then grab what is there in the messages then invoke the model
+![alt text](<Screen shots/summary.png>)
+
+We also create summarize conversation node, if there is summary then it is added to the new summary prompt. we nuse the remove messages trick to keep only the latest ones.
+![alt text](<Screen shots/summarize messages node.png>)
+
+We add a conditional edge that will help us to know whether to summarize or continue.
+
+
+We know the state is transient and limited to single graph execution => multi turn conversation difficult => we use checkpointer
+![alt text](<Screen shots/compiling the graph with check pointer.png>)
+
+![alt text](<Screen shots/summarize graph.png>)
+
+![alt text](<Screen shots/Summary + memory.png>)
 
