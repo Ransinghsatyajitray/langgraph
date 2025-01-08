@@ -601,6 +601,43 @@ If we pass just the thread id, it will just pass the current state.
 Its fast as we are just replaying and not rexecute from the human input.
 
 **Forking**
+To check for alternative trajectory.
+![alt text](<Screen shots/forking.png>)
+
+![alt text](<Screen shots/forking vs replaying.png>)
+
+Planning a Trip
+
+![alt text](<Screen shots/Planning a Trip.png>)
+
+*Forking*
+After the agent presents the initial flight and hotel options, the user might say, "I don't like these hotels. Can you find some with better reviews?"
+    • Forking: At this point, you could fork the workflow. The original branch continues with the existing options, but you create a new branch that: 
+        ○ Takes the current state (including user preferences and travel dates).
+        ○ Adds a new constraint for "better reviews."
+        ○ Re-runs the hotel search with the updated criteria.
+        ○ Presents the new hotel options to the user.
+This allows the agent to explore a different path without abandoning the original options. If the user doesn't like the new hotels, they can always go back to the original branch.
+A new check point is added.
+
+
+*Replaying*
+Imagine the agent encounters an error while making the final booking, perhaps due to a temporary issue with the booking API.
+    • Replaying: You could replay the workflow from a checkpoint just before the booking step. This would re-execute the steps leading up to the booking, allowing you to: 
+        ○ Debug the error and identify its cause.
+        ○ Test potential solutions without affecting the original booking attempt.
+Once the issue is resolved, replay the workflow again to successfully complete the booking.
+
+To play with alternate trajectories the IDE is the easier option.
+
+![alt text](<Screen shots/Replaying vs Forking.png>)
+
+*When to Use:*
+
+Fork: When you need different approaches for different cases
+Replay: When you need to refine or retry until success
+
+## Building Your assistance
 
 
 
