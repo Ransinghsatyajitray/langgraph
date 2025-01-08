@@ -569,6 +569,48 @@ In Studio I can add manually add interrupts in the graph.
 ![alt text](<Screen shots/Manually adding interrupt in Studio.png>)
 
 **Awaiting user input**
+We can put break point, edit the graph state at a given break point.
+Here we will see how to explicitly get user input to modify the state. => we can do this by providing a dummy node, which is basically a no operation node that will accept user feedback and inject it into a graph at a particular point.
+
+*Dummy node in human feedback*
+![alt text](<Screen shots/dummy node as human feedback node.png>)
+
+**Dynamic Breakpoint**
+Graph to interrupt itself. eg . stay on the graph if you meet certain condition.
+NodeInterrupt
+
+![alt text](<Screen shots/NodeInterrupt.png>)
+
+
+**Time Travel**
+LangGraph feature to support debugging by viewing, replaying and even forking from past states.-> this is callectively called time travel
+
+browsing history -> get_state -> this give info on current state for a particular thread.
+
+history of every state -> get_state_history (1st state is the current state, the last one would be the START node)
+
+![alt text](<Screen shots/Get state history.png>)
+
+**Replay**
+We can replay our agent from any of the prior steps.
+![alt text](<Screen shots/replaying.png>)
+
+If we pass checkpoint id with thread id, in that case the graph will start from a particular check point.(using this we can rewind/replay(model knows it has executed in the past) from any checkpoint within the thread)
+If we pass just the thread id, it will just pass the current state.
+
+Its fast as we are just replaying and not rexecute from the human input.
+
+**Forking**
+
+
+
+
+
+
+
+
+
+
 
 
 
