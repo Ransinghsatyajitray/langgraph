@@ -502,3 +502,75 @@ We know the state is transient and limited to single graph execution => multi tu
 
 ![alt text](<Screen shots/Summary + memory.png>)
 
+**Chatbot with summarizing messages and external memory**
+For the above examples the persistence(due to in memory checkpointer) is valid till the notebook is in existence.
+The overall token usage is reduced when we do summarization of chat messages => feasibility for long running conversations.
+
+sqlite and postgres - external storage
+
+sqlite - small , light and very small db, good starting point for external db checkpointers
+
+![alt text](<Screen shots/In memory to external -sqlite.png>)
+
+Langgraph has its own builtin persistence layer.
+The persistence layer in case of the Langgraph is postgres
+
+## Module 3 : UX and Human in the loop
+How to combine agent with Human = Human in the loop
+In many cases we need human approval before agent take an action.
+
+**Streaming**
+In LangGraph there are 2 methods for streaming - stream and astream (sync and async)
+
+![alt text](<Screen shots/Accumulated full state is populated.png>)
+
+steaming modes -> updates and values
+
+![alt text](<Screen shots/streaming with updates and values.png>)
+
+**Streaming tokens**
+astream_events methods the events that comes out is a dictionary with few different keys(event, name, data and metadata)
+
+Streaming allow us to emit graph state in each step.
+
+**Breakpoints**
+Human in loop
+approve certain steps - some tools are sensitive so we have to allow it first for agent to execute those kind of action.
+
+Approval
+Debugging -to reproduce prior issues and to know future onces
+Editing - modify state with human in the loop
+
+we use interrupt_before and interrupt_before to make use of it. 
+
+![alt text](<Screen shots/concept checkpoint thread snapshot.png>)
+
+When we run the stream and pass None then we remit the current state and then execute the next nodes.
+We can stop the graph at any node we can then continue by passing None with thread id to pick back up from the current state of the graph.
+
+We can also pass the interrupt before in the client api(we get from langgraph ide) runs and not only using the code.
+
+![alt text](<Screen shots/Approval step in the ide.png>)
+
+**Editing State and Human**
+Edit the graph state once it is stopped.
+The break points also give the opportunities to modify the graph state once it is stopped.
+update_state
+
+![alt text](<Screen shots/Human in loop.png>)
+
+![alt text](<Screen shots/Human in loop01.png>)
+
+![alt text](<Screen shots/Human in Loop03.png>)
+
+
+In Studio I can add manually add interrupts in the graph.
+
+![alt text](<Screen shots/Manually adding interrupt in Studio.png>)
+
+**Awaiting user input**
+
+
+
+
+
