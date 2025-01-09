@@ -638,6 +638,29 @@ Fork: When you need different approaches for different cases
 Replay: When you need to refine or retry until success
 
 ## Building Your assistance
+What agents are + Core LangGraph Extractions + Memory + Human in Loop + Making the system run faster-> AI Assistant
+Automate boring and Tidious part of the daily task.
+
+![alt text](<Screen shots/Human in Loop parts.png>)
+
+**Fan out and in**
+![alt text](<Screen shots/Fan in Fan out.png>)
+
+
+
+**Waiting for nodes to finish**
+![alt text](<Screen shots/Waiting for node to finish.png>)
+
+**Custom reducer to sort values during execution**
+![alt text](<Screen shots/Custom reducer to sort values in parallelization.png>)
+
+## Realistic Usecase
+![alt text](<Screen shots/realistic use case.png>)
+
+
+
+
+
 
 
 
